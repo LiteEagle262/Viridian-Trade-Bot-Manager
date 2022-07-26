@@ -63,6 +63,7 @@ async def help(ctx):
         e.add_field(name=f"{prefix}stop", value="Stops The Trade Bot", inline=True)
         e.add_field(name=f"{prefix}restart", value="Restarts the Trade bot", inline=True)
         e.add_field(name=f"{prefix}config <attachedfile>", value="Replaces the current config with the config attached", inline=True)
+        e.add_field(name=f"{prefix}proxy <attachedfile>", value="Replaces the current proxies with the proxies attached", inline=True)
         e.set_thumbnail(url=thumbnail)
         e.timestamp = datetime.datetime.utcnow()
         e.set_footer(text='Trade Bot Manager')
