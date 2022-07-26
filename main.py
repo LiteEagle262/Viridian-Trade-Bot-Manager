@@ -36,7 +36,6 @@ def open_file():
 @client.event
 async def on_connect():
     banner()
-    open_file()
 
 def close_file():
     os.system('TASKKILL /F /IM Cry.ConsoleApp.exe')
@@ -164,4 +163,5 @@ async def proxy(ctx):
                 e.set_footer(text='Trade Bot Manager')
                 await ctx.send(embed=e)                
 
+open_file()
 client.run(token)
