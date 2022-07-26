@@ -13,7 +13,6 @@ intents = discord.Intents().all()
 client = commands.Bot(command_prefix=prefix, intents=intents)
 client.remove_command("help")
 
-
 def banner():
     os.system('cls')
     ctypes.windll.kernel32.SetConsoleTitleW("Made by LiteEagle262 | liteeagle.me")
@@ -39,10 +38,8 @@ async def on_connect():
     banner()
     open_file()
 
-
 def close_file():
     os.system('TASKKILL /F /IM Cry.ConsoleApp.exe')
-
 
 def process_exists(process_name):
     call = 'TASKLIST', '/FI', 'imagename eq %s' % process_name
@@ -50,7 +47,6 @@ def process_exists(process_name):
     last_line = output.strip().split('\r\n')[-1]
     pn_lower = process_name.lower()
     return last_line.lower().startswith(pn_lower)
-
 
 @client.command()
 async def help(ctx):
@@ -100,7 +96,6 @@ async def stop(ctx):
             e.set_footer(text='Trade Bot Manager')
             await ctx.send(embed=e)
 
-
 @client.command()
 async def open(ctx):
     if ctx.message.author.id == int(userid):
@@ -117,7 +112,6 @@ async def open(ctx):
             e.timestamp = datetime.datetime.utcnow()
             e.set_footer(text='Trade Bot Manager')
             await ctx.send(embed=e)
-
 
 @client.command()
 async def restart(ctx):
