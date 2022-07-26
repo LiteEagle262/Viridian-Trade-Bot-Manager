@@ -151,6 +151,23 @@ async def config(ctx):
                 e.timestamp = datetime.datetime.utcnow()
                 e.set_footer(text='Trade Bot Manager')
                 await ctx.send(embed=e)
-
+@client.command()
+async def proxy(ctx):
+    if ctx.message.author.id == int(userid):
+        if str(ctx.message.attachments) == "[]":
+            return
+        else:
+            split_v1 = str(ctx.message.attachments).split("filename='")[1]
+            filename = str(split_v1).split("' ")[0]
+            if filename == "proxies.txt":
+                if os.path.exists("proxies.txt") == True:
+                    os.remove("proxies.txt")
+                await asyncio.sleep(2)
+                await ctx.message.attachments[0].save(fp="{}".format(filename))
+                e = discord.Embed(title=f'**Success**', description=f"Successfully Uploaded the proxies to the bot. (bot restart may be required)", color=0xff0000)
+                e.set_thumbnail(url=thumbnail)
+                e.timestamp = datetime.datetime.utcnow()
+                e.set_footer(text='Trade Bot Manager')
+                await ctx.send(embed=e)                
 
 client.run(token)
