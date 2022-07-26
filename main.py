@@ -27,11 +27,11 @@ def banner():
 
                          https://github.com/LiteEagle262/Viridian-Trade-Bot-Manager
 
-            Viridian Trade Bot Manager | Logged in as: {client.user.name}#{client.user.discriminator}
-                                ID: {client.user.id} | Prefix: {prefix}
+                Viridian Trade Bot Manager | Logged in as: {client.user.name}#{client.user.discriminator}
+                                    ID: {client.user.id} | Prefix: {prefix}
         """)
 
-def open():
+def open_file():
     os.startfile("Cry.ConsoleApp.exe")
     if os.path.exists("players.txt") == True:
         os.remove("players.txt")
@@ -39,10 +39,10 @@ def open():
 @client.event
 async def on_connect():
     banner()
-    # open()
+    open_file()
 
 
-def close():
+def close_file():
     os.system('TASKKILL /F /IM Cry.ConsoleApp.exe')
 
 
@@ -88,7 +88,7 @@ async def check(ctx):
 async def stop(ctx):
     if ctx.message.author.id == int(userid):
         if process_exists("Cry.ConsoleApp.exe") == True:
-            close()
+            close_file()
             e = discord.Embed(title=f'**Success**', description=f"Successfully Stopped Viridian Trade Bot, to open it again do, `{prefix}open`", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
             e.timestamp = datetime.datetime.utcnow()
@@ -106,7 +106,7 @@ async def stop(ctx):
 async def open(ctx):
     if ctx.message.author.id == int(userid):
         if process_exists("Cry.ConsoleApp.exe") == False:
-            open()
+            open_file()
             e = discord.Embed(title=f'**Success**', description=f"Successfully Opened Viridian Trade Bot, to stop it do, `{prefix}stop`", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
             e.timestamp = datetime.datetime.utcnow()
@@ -123,9 +123,9 @@ async def open(ctx):
 @client.command()
 async def restart(ctx):
     if ctx.message.author.id == int(userid):
-        close()
-        asyncio.sleep(2)
-        open()
+        close_file()
+        await asyncio.sleep(2)
+        open_file()
         e = discord.Embed(title=f'**Success**', description=f"Successfully Restarted The Bot", color=0xff0000)
         e.set_thumbnail(url=thumbnail)
         e.timestamp = datetime.datetime.utcnow()
@@ -144,7 +144,7 @@ async def config(ctx):
             if filename == "appsettings.json":
                 if os.path.exists("appsettings.json") == True:
                     os.remove("appsettings.json")
-                asyncio.sleep(2)
+                await asyncio.sleep(2)
                 await ctx.message.attachments[0].save(fp="{}".format(filename))
                 e = discord.Embed(title=f'**Success**', description=f"Successfully Uploaded the config to the bot. (bot restart may be required)", color=0xff0000)
                 e.set_thumbnail(url=thumbnail)
