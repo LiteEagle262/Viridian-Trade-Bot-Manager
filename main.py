@@ -24,9 +24,7 @@ def banner():
             ██╔══██╗██║   ██║   ██║       ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  ██╔══██╗
             ██████╔╝╚██████╔╝   ██║       ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║
             ╚═════╝  ╚═════╝    ╚═╝       ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
-
                          https://github.com/LiteEagle262/Viridian-Trade-Bot-Manager
-
                 Viridian Trade Bot Manager | Logged in as: {client.user.name}#{client.user.discriminator}
                                     ID: {client.user.id} | Prefix: {prefix}
         """)
@@ -152,6 +150,7 @@ async def config(ctx):
                 e.timestamp = datetime.datetime.utcnow()
                 e.set_footer(text='Trade Bot Manager')
                 await ctx.send(embed=e)
+
 @client.command()
 async def proxy(ctx):
     if ctx.message.author.id == int(userid):
