@@ -4,7 +4,7 @@
 
 **Ment mainly for vps, Dont re-upload please.**
 
-((A compiled version is in releases if you dont have python and or your vps doesnt have it installed, so you dont have to go through installing it**
+**A compiled version is in releases if you dont have python and or your vps doesnt have it installed, so you dont have to go through installing it**
 
 
 
