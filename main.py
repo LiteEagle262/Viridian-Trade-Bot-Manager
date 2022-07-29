@@ -8,6 +8,7 @@ userid = config.get('discord-id')
 token = config.get('bot-token')
 prefix = config.get('bot-prefix')
 thumbnail = 'https://cdn.discordapp.com/icons/822519367866253373/8b2422ccb9b5ee7abce83f026ae22c5b.webp'
+process_name = 'Viridian.ConsoleApp.exe'
 
 intents = discord.Intents().all()
 client = commands.Bot(command_prefix=prefix, intents=intents)
@@ -28,19 +29,21 @@ def banner():
                                     ID: {client.user.id} | Prefix: {prefix}
         """)
 
-def open_file():
-    os.startfile("Viridian.ConsoleApp.exe")
-    if os.path.exists("players.txt") == True:
-        os.remove("players.txt")
-
 @client.event
 async def on_connect():
     banner()
 
-def close_file():
-    os.system('TASKKILL /F /IM Viridian.ConsoleApp.exe')
+def open_file():
+    os.startfile(process_name)
+    if os.path.exists("players.txt") == True:
+        os.remove("players.txt")
+    else:
+        os.startfile(process_name)
 
-def process_exists(process_name):
+def close_file():
+    os.system(f"TASKKILL /F /IM {process_name}")
+
+def process_exists():
     call = 'TASKLIST', '/FI', 'imagename eq %s' % process_name
     output = subprocess.check_output(call).decode()
     last_line = output.strip().split('\r\n')[-1]
@@ -66,7 +69,7 @@ async def help(ctx):
 @client.command()
 async def check(ctx):
     if ctx.message.author.id == int(userid):
-        if process_exists("Viridian.ConsoleApp.exe") == True:
+        if process_exists() == True:
             e = discord.Embed(title=f'**Running**', description=f"The Trade bot is currently running", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
             e.timestamp = datetime.datetime.utcnow()
@@ -82,7 +85,7 @@ async def check(ctx):
 @client.command()
 async def stop(ctx):
     if ctx.message.author.id == int(userid):
-        if process_exists("Viridian.ConsoleApp.exe") == True:
+        if process_exists() == True:
             close_file()
             e = discord.Embed(title=f'**Success**', description=f"Successfully Stopped Viridian Trade Bot, to open it again do, `{prefix}open`", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
@@ -99,7 +102,7 @@ async def stop(ctx):
 @client.command()
 async def open(ctx):
     if ctx.message.author.id == int(userid):
-        if process_exists("Viridian.ConsoleApp.exe") == False:
+        if process_exists() == False:
             open_file()
             e = discord.Embed(title=f'**Success**', description=f"Successfully Opened Viridian Trade Bot, to stop it do, `{prefix}stop`", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
