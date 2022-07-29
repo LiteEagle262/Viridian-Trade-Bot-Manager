@@ -29,7 +29,7 @@ def banner():
         """)
 
 def open_file():
-    os.startfile("Cry.ConsoleApp.exe")
+    os.startfile("Viridian.ConsoleApp.exe")
     if os.path.exists("players.txt") == True:
         os.remove("players.txt")
 
@@ -38,7 +38,7 @@ async def on_connect():
     banner()
 
 def close_file():
-    os.system('TASKKILL /F /IM Cry.ConsoleApp.exe')
+    os.system('TASKKILL /F /IM Viridian.ConsoleApp.exe')
 
 def process_exists(process_name):
     call = 'TASKLIST', '/FI', 'imagename eq %s' % process_name
@@ -66,7 +66,7 @@ async def help(ctx):
 @client.command()
 async def check(ctx):
     if ctx.message.author.id == int(userid):
-        if process_exists("Cry.ConsoleApp.exe") == True:
+        if process_exists("Viridian.ConsoleApp.exe") == True:
             e = discord.Embed(title=f'**Running**', description=f"The Trade bot is currently running", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
             e.timestamp = datetime.datetime.utcnow()
@@ -82,7 +82,7 @@ async def check(ctx):
 @client.command()
 async def stop(ctx):
     if ctx.message.author.id == int(userid):
-        if process_exists("Cry.ConsoleApp.exe") == True:
+        if process_exists("Viridian.ConsoleApp.exe") == True:
             close_file()
             e = discord.Embed(title=f'**Success**', description=f"Successfully Stopped Viridian Trade Bot, to open it again do, `{prefix}open`", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
@@ -99,7 +99,7 @@ async def stop(ctx):
 @client.command()
 async def open(ctx):
     if ctx.message.author.id == int(userid):
-        if process_exists("Cry.ConsoleApp.exe") == False:
+        if process_exists("Viridian.ConsoleApp.exe") == False:
             open_file()
             e = discord.Embed(title=f'**Success**', description=f"Successfully Opened Viridian Trade Bot, to stop it do, `{prefix}stop`", color=0xff0000)
             e.set_thumbnail(url=thumbnail)
