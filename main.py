@@ -37,8 +37,6 @@ def open_file():
     os.startfile(process_name)
     if os.path.exists("players.txt") == True:
         os.remove("players.txt")
-    elif os.path.exists("players.txt") == False:
-        os.startfile(process_name)
 
 def close_file():
     os.system(f"TASKKILL /F /IM {process_name}")
